@@ -1,4 +1,4 @@
-# Publica la charla en GitHub Pages: https://<usuario>.github.io/<repositorio>/
+# Publica las dos charlas en GitHub Pages: / (portada), /openspec/ y /spec-kit/
 # Requiere Settings → Pages → Build and deployment → Source: GitHub Actions.
 # `base: './'` en vite.config.ts hace que las rutas funcionen bajo /<repositorio>/.
 name: pages
@@ -27,7 +27,7 @@ jobs:
       - run: npm ci
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3
-        with: { path: dist }
+        with: { path: site }
 
   deploy:
     needs: build

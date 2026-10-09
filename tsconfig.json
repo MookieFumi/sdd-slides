@@ -17,8 +17,8 @@
     "baseUrl": ".",
     "paths": {
       "beatdeck": ["src/beatdeck/index.ts"],
-      "@deck": ["deck/index.tsx"]
+      "@deck": ["decks/openspec/index.tsx"]
     }
   },
-  "include": ["src", "deck", "vite.config.ts"]
+  "include": ["src", "decks", "vite.config.ts"]
 }

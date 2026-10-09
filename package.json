@@ -1,19 +1,24 @@
 {
-  "name": "openspec-y-spec-kit-en-la-practica",
+  "name": "sdd-slides",
   "private": true,
   "version": "0.1.0",
-  "description": "OpenSpec y Spec Kit en la práctica",
+  "description": "OpenSpec y Spec Kit en la práctica — dos charlas",
   "author": "Miguel Martín",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc --noEmit -p . && vite build && node scripts/check-offline.mjs dist deck",
-    "present": "npm run build && vite preview --host 127.0.0.1 --port 4173 --strictPort --open",
-    "preview": "vite preview --host 127.0.0.1 --port 4173 --strictPort",
-    "verify": "node scripts/verify.mjs dist artifacts/verify",
+    "dev": "vite --mode openspec",
     "shot": "node scripts/shot.mjs",
     "upgrade": "node scripts/upgrade.mjs",
-    "typecheck": "tsc --noEmit -p ."
+    "typecheck": "tsc --noEmit -p .",
+    "dev:openspec": "vite --mode openspec --port 5173",
+    "dev:spec-kit": "vite --mode spec-kit --port 5174",
+    "build:openspec": "vite build --mode openspec && node scripts/check-offline.mjs dist-openspec decks/openspec",
+    "build:spec-kit": "vite build --mode spec-kit && node scripts/check-offline.mjs dist-spec-kit decks/spec-kit",
+    "build": "tsc --noEmit -p . && npm run build:openspec && npm run build:spec-kit && node scripts/assemble-site.mjs",
+    "verify:openspec": "node scripts/make-source.mjs && node scripts/verify.mjs dist-openspec artifacts/verify-openspec --source=artifacts/fuentes.md",
+    "verify:spec-kit": "node scripts/make-source.mjs && node scripts/verify.mjs dist-spec-kit artifacts/verify-spec-kit --source=artifacts/fuentes.md",
+    "preview": "vite preview --outDir site --host 127.0.0.1 --port 4173 --strictPort",
+    "audit": "node scripts/make-audit.mjs"
   },
   "dependencies": {
     "@fontsource-variable/inter": "^5.3.0",

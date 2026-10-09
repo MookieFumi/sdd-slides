@@ -10,7 +10,7 @@ const root = (p: string) => fileURLToPath(new URL(p, import.meta.url));
  */
 export default defineConfig(({ mode }) => {
   const example = mode === 'development' || mode === 'production' ? null : mode;
-  const deckDir = example ? `examples/${example}` : 'deck';
+  const deckDir = example ? `decks/${example}` : 'decks/openspec';
   return {
     base: './',
     plugins: [react()],
@@ -21,7 +21,7 @@ export default defineConfig(({ mode }) => {
       },
     },
     build: {
-      outDir: example ? `dist-${example}` : 'dist',
+      outDir: example ? `dist-${example}` : 'dist-openspec',
       target: 'es2022',
       assetsInlineLimit: 0,
       chunkSizeWarningLimit: 900,

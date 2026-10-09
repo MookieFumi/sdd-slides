@@ -1,4 +1,0 @@
-/* Prompt de terminal decorativo: es CSS (::before), así el texto del DOM es exactamente el comando de la guía. */
-.sh .bd-term-line { font-weight: 600; }
-.sh .bd-term-line::before { content: '> '; color: var(--accent); font-weight: 600; transition: color 400ms; }
-.sh .bd-term-line.dim::before { color: var(--ink-3); }

@@ -37,4 +37,4 @@ Mapa de la charla (teclas 1–9 saltan a la escena): 1 portada · 2 OpenSpec (po
 
 ## Config to check on the day
 
-`deck/deck.config.ts`: title, speaker, `qrUrl` (actualmente: `TODO`, es decir, sin QR; el cierre es solo "¿Preguntas?"). Rebuild after editing.
+`decks/<charla>/deck.config.ts`: title, speaker, `qrUrl` (actualmente: `TODO`, es decir, sin QR; el cierre es solo "¿Preguntas?"). Rebuild after editing.
