@@ -6,7 +6,7 @@ export const config = {
   title: 'OpenSpec y Spec Kit en la práctica',
   /** One line under the title. Empty = none. */
   subtitle: 'Guía de uso',
-  author: 'Miguel Ángel',
+  author: 'Miguel Martín',
   /** Ciudad y fecha de la charla (el evento no tiene nombre). */
   place: 'Madrid',
   date: '9 oct 2026',
@@ -19,5 +19,7 @@ export const config = {
    * Viven aquí para que la comprobación sin conexión las reconozca como texto y no como recursos remotos.
    */
   specKitInstallCmd: 'uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@v1.1.0',
+  /** Instalador independiente de uv para Windows (CMD o PowerShell), tomado de la guía oficial de uv. */
+  uvInstallCmd: 'powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"',
   uvGuideUrl: 'https://github.github.io/spec-kit/install/uv.html',
 } as const;

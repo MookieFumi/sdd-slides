@@ -15,7 +15,7 @@ cada uno con portada, preparar, flujo en el chat de Copilot y comandos de termin
 | --- | --- | --- |
 | Título | OpenSpec y Spec Kit en la práctica | pedido del usuario + títulos de las guías |
 | Subtítulo | Guía de uso | nombre de los archivos de las guías |
-| Ponente | Miguel Ángel | perfil del usuario (sin apellido ni cargo) |
+| Ponente | Miguel Martín | indicado por el usuario el 9 oct 2026 (sin cargo) |
 | Evento · ciudad · fecha | Sin nombre de evento · Madrid · 9 oct 2026 | indicado por el usuario el 9 oct 2026 |
 | Destino del QR | ninguno (el usuario eligió cierre solo con preguntas) | decisión del usuario |
 | Versión de Spec Kit | v1.1.0, consultada el 6 oct 2026 | guía de Spec Kit |
@@ -47,7 +47,7 @@ cada uno con portada, preparar, flujo en el chat de Copilot y comandos de termin
 | Hero: "Configura Spec Kit en Windows y guía cada funcionalidad desde GitHub Copilot Chat." | — | cut | lo cubren 5.3 (Windows) y 6.1 (Copilot Chat) |
 | Hero: flujo SDD (Especificar > Planificar > Desglosar > Implementar > Converger) + nota de constitución y controles | 5.2 | kept | |
 | Prepara el entorno + nota (Python 3.11, uv, Copilot, PowerShell en Windows) | 5.3 | kept | |
-| 01 Instalar uv (`python --version`) | 5.4 | kept | ver preguntas abiertas |
+| 01 Instalar uv | 5.4 | changed | comando sustituido a petición del ponente (ver decisiones) |
 | 02 Instalar Spec Kit v1.1.0 | 5.5 | kept | comando de 83 caracteres a tamaño reducido para que quepa íntegro |
 | 03 Crear un proyecto con Copilot | 5.6 | kept | |
 | Trabaja en una funcionalidad + nota | 6.1 | kept | |
@@ -69,13 +69,15 @@ Ninguno: las guías no contienen imágenes ni logos. No se ha dibujado ningún l
 
 ## Preguntas abiertas
 
-- [ ] La tarjeta "Instalar uv" de la guía de Spec Kit muestra el comando `python --version` (comprueba Python, no instala uv). Se ha respetado la guía tal cual; conviene revisarla.
+- [ ] La descripción de "Instalar uv" habla de instalar también Python 3.11+, pero el comando mostrado solo instala uv. Conviene decidir si se ajusta el texto.
 - [ ] En la guía de OpenSpec, el identificador de ejemplo es `NOME-DA-MUDANCA` (portugués) dentro de un texto en español. Se mantiene literal por ser parte del comando.
 - [ ] ¿El apellido o cargo del ponente debe ir en la portada?
 
 ## Decisiones tomadas en nombre del ponente
 
-- Ponente "Miguel Ángel", sin apellido ni cargo, y subtítulo "Guía de uso".
+- Ponente "Miguel Martín", sin cargo, y subtítulo "Guía de uso".
+- A petición del ponente (9 oct 2026): la tarjeta "Instalar uv" (5.4) muestra `powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"`, el instalador independiente para Windows de la guía oficial de uv, en lugar de `python --version`. El texto de apoyo sigue siendo el de la guía de Spec Kit ("Instala Python 3.11+ y uv antes de continuar."), aunque ese comando solo instala uv. Ese comando se añadió a `reference/guias-texto.md`, en un apartado propio, para que la verificación lo reconozca.
+- A petición del ponente (9 oct 2026): los comandos del chat de Copilot se muestran sin la barra inicial (`opsx-explore`, `speckit-plan`…), también en las notas ("Los comandos opsx-* …", "…como opsx-update."). Sin la barra no se escriben tal cual en el chat de Copilot; el texto de escena sigue siendo un fragmento literal de la guía.
 - Los comandos de terminal llevan un prompt `>` decorativo dibujado con CSS (no forma parte del texto, que es exactamente el de la guía); los comandos del chat de Copilot se muestran sin prompt.
 - Se han quitado las comillas de código de la guía (`/opsx-*`, `/opsx-update`, `tasks.md`, `spec.md`…) en los textos de apoyo, porque en escena no hay formato Markdown.
 - Las URL que aparecen en escena o en notas (`git+https://github.com/github/spec-kit.git@v1.1.0` y la guía de uv) viven en `deck/deck.config.ts` para que la comprobación sin conexión las trate como texto; no se descargan.

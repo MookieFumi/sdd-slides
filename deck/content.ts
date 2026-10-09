@@ -44,37 +44,37 @@ export const OS = {
 
   flowKicker: 'DEL BORRADOR AL ARCHIVO',
   flowTitle: 'Trabaja en un cambio',
-  flowNote: 'Los comandos /opsx-* se usan en el campo de chat de GitHub Copilot en VS Code.',
+  flowNote: 'Los comandos opsx-* se usan en el campo de chat de GitHub Copilot en VS Code.',
   flow: [
     {
       index: '03 / Explorar', surface: 'CHAT DE COPILOT', title: 'Madurar una idea',
-      cmd: '/opsx-explore',
+      cmd: 'opsx-explore',
       desc: 'Investiga posibilidades y aclara decisiones antes de formalizar el alcance. Es opcional.',
     },
     {
       index: '04 / Proponer', surface: 'CHAT DE COPILOT', title: 'Crear el plan',
-      cmd: '/opsx-propose',
+      cmd: 'opsx-propose',
       desc: 'Describe qué quieres cambiar. Genera la propuesta, la especificación, el diseño y las tareas.',
     },
     {
       index: '05 / Aplicar', surface: 'CHAT DE COPILOT', title: 'Implementar las tareas',
-      cmd: '/opsx-apply',
+      cmd: 'opsx-apply',
       desc: 'Con el plan listo, recorre las tareas del cambio e implementa la solución.',
     },
     {
       index: '06 / Sincronizar', surface: 'CHAT DE COPILOT', title: 'Actualizar las especificaciones principales',
-      cmd: '/opsx-sync',
+      cmd: 'opsx-sync',
       desc: 'Aplica las especificaciones delta de este cambio a las especificaciones principales sin archivarlo.',
     },
     {
       index: '07 / Archivar', surface: 'CHAT DE COPILOT', title: 'Concluir un cambio',
-      cmd: '/opsx-archive',
+      cmd: 'opsx-archive',
       desc: 'Después de implementar y revisar, archiva el contexto del cambio concluido.',
     },
   ] as Step[],
   support: {
     index: 'ACCIÓN DE APOYO', surface: 'CHAT DE COPILOT', title: 'Revisar el plan',
-    cmd: '/opsx-update',
+    cmd: 'opsx-update',
     desc: 'Revisa los artefactos existentes de un cambio para mantener la coherencia. No implementa código.',
   } as Step,
   flowSummaryLead: 'En el orden habitual:',
@@ -112,7 +112,7 @@ export const OS = {
     {
       index: '06 / Instrucciones', surface: 'TERMINAL', title: 'Actualizar las instrucciones de OpenSpec',
       cmd: 'openspec update',
-      desc: 'Actualiza los archivos de instrucciones del proyecto; no revisa el plan como /opsx-update.',
+      desc: 'Actualiza los archivos de instrucciones del proyecto; no revisa el plan como opsx-update.',
     },
   ] as Step[],
 };
@@ -136,7 +136,7 @@ export const SK = {
   prep: [
     {
       index: '01 / Requisitos', surface: 'WINDOWS', title: 'Instalar uv',
-      cmd: 'python --version',
+      cmd: config.uvInstallCmd,
       desc: 'Instala Python 3.11+ y uv antes de continuar.',
     },
     {
@@ -157,49 +157,49 @@ export const SK = {
   flow: [
     {
       index: '01 / Una vez por proyecto', surface: 'COPILOT CHAT', title: 'Establecer la constitución',
-      cmd: '/speckit-constitution',
+      cmd: 'speckit-constitution',
       desc: 'Define los principios del proyecto que orientarán y evaluarán las etapas siguientes.',
     },
     {
       index: '02 / Definir', surface: 'COPILOT CHAT', title: 'Especificar qué construir',
-      cmd: '/speckit-specify',
+      cmd: 'speckit-specify',
       desc: 'Describe qué necesitas y por qué. Concéntrate en el comportamiento, no en la tecnología.',
     },
     {
       index: '03 / Diseñar', surface: 'COPILOT CHAT', title: 'Crear el plan técnico',
-      cmd: '/speckit-plan',
+      cmd: 'speckit-plan',
       desc: 'Indica el stack, la arquitectura y las restricciones para generar los artefactos de diseño.',
     },
     {
       index: '04 / Desglosar', surface: 'COPILOT CHAT', title: 'Generar las tareas',
-      cmd: '/speckit-tasks',
+      cmd: 'speckit-tasks',
       desc: 'Convierte el diseño en tareas accionables y ordenadas según sus dependencias.',
     },
     {
       index: '05 / Construir', surface: 'COPILOT CHAT', title: 'Implementar las tareas',
-      cmd: '/speckit-implement',
+      cmd: 'speckit-implement',
       desc: 'Ejecuta las tareas de tasks.md en orden de dependencias y valida el resultado.',
     },
     {
       index: '06 / Verificar', surface: 'COPILOT CHAT', title: 'Comprobar la convergencia',
-      cmd: '/speckit-converge',
+      cmd: 'speckit-converge',
       desc: 'Compara la implementación con los artefactos. Si quedan brechas, agrega tareas y repite.',
     },
   ] as Step[],
   optional: [
     {
       index: 'CONTROL OPCIONAL', surface: 'COPILOT CHAT', title: 'Aclarar requisitos',
-      cmd: '/speckit-clarify',
+      cmd: 'speckit-clarify',
       desc: 'Resuelve ambigüedades en la especificación antes de planificar.',
     },
     {
       index: 'CONTROL OPCIONAL', surface: 'COPILOT CHAT', title: 'Revisar la calidad de requisitos',
-      cmd: '/speckit-checklist',
+      cmd: 'speckit-checklist',
       desc: 'Genera una lista para evaluar que los requisitos sean completos, claros y coherentes.',
     },
     {
       index: 'CONTROL OPCIONAL', surface: 'COPILOT CHAT', title: 'Analizar la coherencia',
-      cmd: '/speckit-analyze',
+      cmd: 'speckit-analyze',
       desc: 'Busca conflictos entre spec.md, plan.md y tasks.md antes de implementar.',
     },
   ] as Step[],

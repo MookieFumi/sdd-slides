@@ -471,3 +471,10 @@ Copiar
 GitHub Spec Kit / SDD v1.1.0
 
 Guía local. Comandos verificados el 6 de octubre de 2026.
+
+# Ajustes pedidos por el ponente (9 oct 2026)
+
+Estos textos no están en las guías originales. La tarjeta "Instalar uv" de la guía de Spec Kit pasa a mostrar
+el instalador de uv para Windows de la guía oficial de uv (https://github.github.io/spec-kit/install/uv.html):
+
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"

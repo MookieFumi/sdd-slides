@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.1.0",
   "description": "OpenSpec y Spec Kit en la práctica",
-  "author": "Miguel Ángel",
+  "author": "Miguel Martín",
   "type": "module",
   "scripts": {
     "dev": "vite",
