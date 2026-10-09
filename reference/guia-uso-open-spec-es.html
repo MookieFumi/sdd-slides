@@ -1,0 +1,630 @@
+<!doctype html>
+<html lang="es-419">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#17352f">
+  <meta name="description" content="Guía rápida de los comandos de OpenSpec para instalarlo y usarlo en el día a día.">
+  <title>OpenSpec en la práctica | Guía de comandos</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #17352f;
+      --muted: #52635f;
+      --paper: #f3f7f4;
+      --surface: #ffffff;
+      --line: #d7e1dc;
+      --orange: #e65e3f;
+      --orange-pale: #fff0eb;
+      --mint: #b8efca;
+      --green: #176b47;
+      --red: #a63b2a;
+      --code: #edf2ef;
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background-color: var(--paper);
+      background-image: repeating-linear-gradient(135deg, transparent 0 22px, rgb(23 53 47 / 2.5%) 22px 23px);
+      color: var(--ink);
+      font-family: "Trebuchet MS", Verdana, sans-serif;
+      font-size: 16px;
+      line-height: 1.55;
+    }
+
+    a { color: inherit; }
+
+    .shell {
+      width: min(1120px, calc(100% - 48px));
+      margin-inline: auto;
+    }
+
+    .masthead {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 72px;
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .brand-mark {
+      display: grid;
+      width: 34px;
+      aspect-ratio: 1;
+      place-items: center;
+      border-radius: 6px;
+      background: var(--orange);
+      color: white;
+      font-family: Georgia, serif;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    .masthead-note {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-align: right;
+      text-transform: uppercase;
+    }
+
+    .hero {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, .75fr);
+      align-items: end;
+      gap: 48px;
+      overflow: hidden;
+      padding: 42px 48px 44px;
+      border-radius: var(--radius);
+      background: var(--ink);
+      color: white;
+    }
+
+    .hero::after {
+      position: absolute;
+      right: 37%;
+      bottom: -100px;
+      width: 230px;
+      height: 230px;
+      border: 1px solid rgb(184 239 202 / 20%);
+      border-radius: 50%;
+      content: "";
+      pointer-events: none;
+    }
+
+    .eyebrow,
+    .section-kicker,
+    .card-index,
+    .surface-label {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow { color: var(--mint); }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      max-width: 580px;
+      margin-bottom: 12px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 48px;
+      font-weight: 400;
+      line-height: 1.04;
+    }
+
+    .hero-copy {
+      max-width: 540px;
+      margin-bottom: 0;
+      color: #d6e3de;
+      font-size: 16px;
+    }
+
+    .route {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 10px;
+      padding: 17px 18px;
+      border: 1px solid rgb(255 255 255 / 18%);
+      border-radius: 6px;
+      background: rgb(255 255 255 / 5%);
+    }
+
+    .route-title {
+      margin: 0 0 2px;
+      color: #d6e3de;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .route-list {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .route-list li {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: white;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .route-list li:not(:last-child)::after {
+      color: var(--mint);
+      content: ">";
+    }
+
+    .route-optional {
+      color: var(--mint);
+      font-size: 12px;
+    }
+
+    .section-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding-block: 22px 10px;
+    }
+
+    .section-nav a {
+      padding: 7px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgb(255 255 255 / 65%);
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .section-nav a:hover { border-color: var(--ink); }
+
+    main { padding-bottom: 40px; }
+
+    .guide-section { padding-top: 34px; }
+
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 16px;
+    }
+
+    .section-kicker {
+      display: block;
+      margin-bottom: 3px;
+      color: var(--orange);
+    }
+
+    h2 {
+      margin-bottom: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 29px;
+      font-weight: 400;
+      line-height: 1.15;
+    }
+
+    .section-note {
+      max-width: 410px;
+      margin-bottom: 2px;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: right;
+    }
+
+    .command-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .command-grid.workflow-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .command-card {
+      min-width: 0;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 13px;
+    }
+
+    .card-index { color: var(--orange); }
+
+    .surface-label {
+      padding: 4px 7px;
+      border-radius: 3px;
+      background: #e8f3ed;
+      color: var(--green);
+      font-size: 9px;
+    }
+
+    .surface-label.chat { background: var(--orange-pale); color: #a4412c; }
+
+    h3 {
+      margin-bottom: 5px;
+      font-size: 18px;
+      line-height: 1.25;
+    }
+
+    .card-copy {
+      min-height: 49px;
+      margin-bottom: 15px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .command-row {
+      display: flex;
+      align-items: stretch;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .command {
+      display: flex;
+      flex: 1 1 auto;
+      align-items: center;
+      min-width: 0;
+      min-height: 44px;
+      margin: 0;
+      padding: 9px 11px;
+      overflow-wrap: anywhere;
+      border: 1px solid #e0e8e3;
+      border-radius: 5px;
+      background: var(--code);
+      color: #213c35;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 13px;
+      line-height: 1.45;
+      user-select: text;
+      white-space: pre-wrap;
+    }
+
+    .copy-button {
+      flex: 0 0 auto;
+      min-width: 82px;
+      min-height: 44px;
+      padding: 8px 12px;
+      border: 1px solid var(--ink);
+      border-radius: 5px;
+      background: var(--ink);
+      color: white;
+      cursor: pointer;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 800;
+      transition: background-color 140ms ease, color 140ms ease, transform 140ms ease;
+    }
+
+    .copy-button:hover { background: #28564b; }
+    .copy-button:active { transform: translateY(1px); }
+    .copy-button:focus-visible, a:focus-visible { outline: 3px solid var(--orange); outline-offset: 3px; }
+
+    .copy-status {
+      min-height: 21px;
+      margin: 6px 0 -4px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .copy-status.success { color: var(--green); }
+    .copy-status.failure { color: var(--red); }
+
+    .workflow-note {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 14px 0 0;
+      padding: 12px 14px;
+      border-left: 3px solid var(--orange);
+      background: var(--orange-pale);
+      color: #55352e;
+      font-size: 13px;
+    }
+
+    .workflow-note strong { color: #8b3624; }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding-block: 20px 28px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    @media (max-width: 760px) {
+      .shell { width: min(100% - 32px, 560px); }
+      .hero { grid-template-columns: 1fr; gap: 24px; padding: 30px 25px; }
+      .hero::after { right: -110px; bottom: 100px; }
+      h1 { font-size: 40px; }
+      .route { max-width: 420px; }
+      .section-heading { align-items: start; flex-direction: column; gap: 5px; }
+      .section-note { text-align: left; }
+      .command-grid, .command-grid.workflow-grid { grid-template-columns: 1fr; }
+      .card-copy { min-height: 0; }
+    }
+
+    @media (max-width: 420px) {
+      .shell { width: calc(100% - 24px); }
+      .masthead { min-height: 62px; }
+      .masthead-note { max-width: 120px; font-size: 10px; }
+      .hero { padding: 26px 19px; }
+      h1 { font-size: 35px; }
+      .command-card { padding: 16px; }
+      .command-row { align-items: stretch; flex-direction: column; }
+      .copy-button { width: 100%; }
+      footer { flex-direction: column; gap: 2px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="shell">
+    <div class="masthead">
+      <div class="brand"><span class="brand-mark" aria-hidden="true">O</span><span>OpenSpec / Guía de campo</span></div>
+      <div class="masthead-note">Referencia rápida<br>para el día a día</div>
+    </div>
+    <div class="hero">
+      <div>
+        <span class="eyebrow">FLUJO DE TRABAJO</span>
+        <h1>OpenSpec<br>en la práctica.</h1>
+        <p class="hero-copy">Desde la preparación del proyecto hasta el archivo del cambio. Encuentra el comando adecuado y úsalo con un clic.</p>
+      </div>
+      <div class="route" aria-label="Flujo habitual de un cambio">
+        <p class="route-title">Flujo típico del cambio</p>
+        <ol class="route-list">
+          <li>Explorar</li><li>Proponer</li><li>Aplicar</li><li>Sincronizar</li><li>Archivar</li>
+        </ol>
+        <span class="route-optional">Explorar es opcional; úsalo cuando necesites madurar la idea.</span>
+      </div>
+    </div>
+    <nav class="section-nav" aria-label="Navegación de la guía">
+      <a href="#preparar">Preparar</a>
+      <a href="#workflow">Trabajar en un cambio</a>
+      <a href="#cli">Comandos de terminal</a>
+    </nav>
+  </header>
+
+  <main class="shell">
+    <section class="guide-section" id="preparar" aria-labelledby="prepare-title">
+      <div class="section-heading">
+        <div><span class="section-kicker">ANTES DE EMPEZAR</span><h2 id="prepare-title">Prepara el entorno</h2></div>
+        <p class="section-note">Instala la herramienta una vez. Inicializa cada proyecto en el que vayas a usar OpenSpec.</p>
+      </div>
+      <div class="command-grid">
+        <article class="command-card">
+          <div class="card-top"><span class="card-index">01 / Herramienta</span><span class="surface-label">TERMINAL</span></div>
+          <h3>Instalar OpenSpec</h3>
+          <p class="card-copy">Instala la CLI de forma global. Ejecútalo en CMD o PowerShell.</p>
+          <div class="command-row">
+            <pre class="command"><code>npm install -g @fission-ai/openspec@latest</code></pre>
+            <button class="copy-button" type="button" data-copy="npm install -g @fission-ai/openspec@latest" aria-label="Copiar comando de instalación">Copiar</button>
+          </div>
+          <p class="copy-status" aria-live="polite" aria-atomic="true"></p>
+        </article>
+        <article class="command-card">
+          <div class="card-top"><span class="card-index">02 / Proyecto</span><span class="surface-label">TERMINAL</span></div>
+          <h3>Inicializar un proyecto</h3>
+          <p class="card-copy">En la carpeta del proyecto, crea la estructura de OpenSpec necesaria para empezar.</p>
+          <div class="command-row">
+            <pre class="command"><code>openspec init</code></pre>
+            <button class="copy-button" type="button" data-copy="openspec init" aria-label="Copiar comando de inicialización">Copiar</button>
+          </div>
+          <p class="copy-status" aria-live="polite" aria-atomic="true"></p>
+        </article>
+      </div>
+    </section>
+
+    <section class="guide-section" id="workflow" aria-labelledby="workflow-title">
+      <div class="section-heading">
+        <div><span class="section-kicker">DEL BORRADOR AL ARCHIVO</span><h2 id="workflow-title">Trabaja en un cambio</h2></div>
+        <p class="section-note">Los comandos `/opsx-*` se usan en el campo de chat de GitHub Copilot en VS Code.</p>
+      </div>
+      <div class="command-grid workflow-grid">
+        <article class="command-card">
+          <div class="card-top"><span class="card-index">03 / Explorar</span><span class="surface-label chat">CHAT DE COPILOT</span></div>
+          <h3>Madurar una idea</h3>
+          <p class="card-copy">Investiga posibilidades y aclara decisiones antes de formalizar el alcance. Es opcional.</p>
+          <div class="command-row">
+            <pre class="command"><code>/opsx-explore</code></pre>
+            <button class="copy-button" type="button" data-copy="/opsx-explore" aria-label="Copiar comando para explorar una idea">Copiar</button>
+          </div>
+          <p class="copy-status" aria-live="polite" aria-atomic="true"></p>
+        </article>
+        <article class="command-card">
+          <div class="card-top"><span class="card-index">04 / Proponer</span><span class="surface-label chat">CHAT DE COPILOT</span></div>
+          <h3>Crear el plan</h3>
+          <p class="card-copy">Describe qué quieres cambiar. Genera la propuesta, la especificación, el diseño y las tareas.</p>
+          <div class="command-row">
+            <pre class="command"><code>/opsx-propose</code></pre>
+            <button class="copy-button" type="button" data-copy="/opsx-propose" aria-label="Copiar comando para proponer un cambio">Copiar</button>
+          </div>
+          <p class="copy-status" aria-live="polite" aria-atomic="true"></p>
+        </article>
+        <article class="command-card">
+          <div class="card-top"><span class="card-index">05 / Aplicar</span><span class="surface-label chat">CHAT DE COPILOT</span></div>
+          <h3>Implementar las tareas</h3>
+          <p class="card-copy">Con el plan listo, recorre las tareas del cambio e implementa la solución.</p>
+          <div class="command-row">
+            <pre class="command"><code>/opsx-apply</code></pre>
+            <button class="copy-button" type="button" data-copy="/opsx-apply" aria-label="Copiar comando para aplicar un cambio">Copiar</button>
+          </div>
+          <p class="copy-status" aria-live="polite" aria-atomic="true"></p>
+        </article>
+        <article class="command-card">
+          <div class="card-top"><span class="card-index">06 / Sincronizar</span><span class="surface-label chat">CHAT DE COPILOT</span></div>
+          <h3>Actualizar las especificaciones principales</h3>
+          <p class="card-copy">Aplica las especificaciones delta de este cambio a las especificaciones principales sin archivarlo.</p>
+          <div class="command-row">
+            <pre class="command"><code>/opsx-sync</code></pre>
+            <button class="copy-button" type="button" data-copy="/opsx-sync" aria-label="Copiar comando para sincronizar las especificaciones">Copiar</button>
+          </div>
+          <p class="copy-status" aria-live="polite" aria-atomic="true"></p>
+        </article>
+        <article class="command-card">
+          <div class="card-top"><span class="card-index">07 / Archivar</span><span class="surface-label chat">CHAT DE COPILOT</span></div>
+          <h3>Concluir un cambio</h3>
+          <p class="card-copy">Después de implementar y revisar, archiva el contexto del cambio concluido.</p>
+          <div class="command-row">
+            <pre class="command"><code>/opsx-archive</code></pre>
+            <button class="copy-button" type="button" data-copy="/opsx-archive" aria-label="Copiar comando para archivar un cambio">Copiar</button>
+          </div>
+          <p class="copy-status" aria-live="polite" aria-atomic="true"></p>
+        </article>
+        <article class="command-card">
+          <div class="card-top"><span class="card-index">ACCIÓN DE APOYO</span><span class="surface-label chat">CHAT DE COPILOT</span></div>
+          <h3>Revisar el plan</h3>
+          <p class="card-copy">Revisa los artefactos existentes de un cambio para mantener la coherencia. No implementa código.</p>
+          <div class="command-row">
+            <pre class="command"><code>/opsx-update</code></pre>
+            <button class="copy-button" type="button" data-copy="/opsx-update" aria-label="Copiar comando para revisar el plan">Copiar</button>
+          </div>
+          <p class="copy-status" aria-live="polite" aria-atomic="true"></p>
+        </article>
+      </div>
+      <p class="workflow-note"><strong>En el orden habitual:</strong> explora si hace falta, propone para generar el plan, aplica para implementar, sincroniza las especificaciones principales y archiva después de revisar.</p>
+    </section>
+
+    <section class="guide-section" id="cli" aria-labelledby="cli-title">
+      <div class="section-heading">
+        <div><span class="section-kicker">CONSULTA RÁPIDA</span><h2 id="cli-title">Comandos de terminal</h2></div>
+        <p class="section-note">Estos comandos se ejecutan en la terminal, dentro del proyecto OpenSpec.</p>
+      </div>
+      <div class="command-grid">
+        <article class="command-card">
+          <div class="card-top"><span class="card-index">01 / Cambios</span><span class="surface-label">TERMINAL</span></div>
+          <h3>Listar cambios activos</h3>
+          <p class="card-copy">Muestra los cambios en curso y sus estados.</p>
+          <div class="command-row">
+            <pre class="command"><code>openspec list</code></pre>
+            <button class="copy-button" type="button" data-copy="openspec list" aria-label="Copiar comando para listar cambios">Copiar</button>
+          </div>
+          <p class="copy-status" aria-live="polite" aria-atomic="true"></p>
+        </article>
+        <article class="command-card">
+          <div class="card-top"><span class="card-index">02 / Especificaciones</span><span class="surface-label">TERMINAL</span></div>
+          <h3>Listar capacidades</h3>
+          <p class="card-copy">Muestra las especificaciones principales disponibles en el proyecto.</p>
+          <div class="command-row">
+            <pre class="command"><code>openspec list --specs</code></pre>
+            <button class="copy-button" type="button" data-copy="openspec list --specs" aria-label="Copiar comando para listar especificaciones">Copiar</button>
+          </div>
+          <p class="copy-status" aria-live="polite" aria-atomic="true"></p>
+        </article>
+        <article class="command-card">
+          <div class="card-top"><span class="card-index">03 / Progreso</span><span class="surface-label">TERMINAL</span></div>
+          <h3>Seguir todos los cambios</h3>
+          <p class="card-copy">Muestra el progreso de los artefactos de cada cambio activo.</p>
+          <div class="command-row">
+            <pre class="command"><code>openspec status --all</code></pre>
+            <button class="copy-button" type="button" data-copy="openspec status --all" aria-label="Copiar comando para consultar el progreso">Copiar</button>
+          </div>
+          <p class="copy-status" aria-live="polite" aria-atomic="true"></p>
+        </article>
+        <article class="command-card">
+          <div class="card-top"><span class="card-index">04 / Inspección</span><span class="surface-label">TERMINAL</span></div>
+          <h3>Inspeccionar un cambio</h3>
+          <p class="card-copy">Muestra los detalles del cambio. Reemplaza NOME-DA-MUDANCA por el identificador real.</p>
+          <div class="command-row">
+            <pre class="command"><code>openspec show NOME-DA-MUDANCA --type change</code></pre>
+            <button class="copy-button" type="button" data-copy="openspec show NOME-DA-MUDANCA --type change" aria-label="Copiar comando para inspeccionar un cambio">Copiar</button>
+          </div>
+          <p class="copy-status" aria-live="polite" aria-atomic="true"></p>
+        </article>
+        <article class="command-card">
+          <div class="card-top"><span class="card-index">05 / Validación</span><span class="surface-label">TERMINAL</span></div>
+          <h3>Validar cambios y especificaciones</h3>
+          <p class="card-copy">Valida todos los cambios y las especificaciones con las comprobaciones estrictas.</p>
+          <div class="command-row">
+            <pre class="command"><code>openspec validate --all --strict</code></pre>
+            <button class="copy-button" type="button" data-copy="openspec validate --all --strict" aria-label="Copiar comando para validar OpenSpec">Copiar</button>
+          </div>
+          <p class="copy-status" aria-live="polite" aria-atomic="true"></p>
+        </article>
+        <article class="command-card">
+          <div class="card-top"><span class="card-index">06 / Instrucciones</span><span class="surface-label">TERMINAL</span></div>
+          <h3>Actualizar las instrucciones de OpenSpec</h3>
+          <p class="card-copy">Actualiza los archivos de instrucciones del proyecto; no revisa el plan como `/opsx-update`.</p>
+          <div class="command-row">
+            <pre class="command"><code>openspec update</code></pre>
+            <button class="copy-button" type="button" data-copy="openspec update" aria-label="Copiar comando para actualizar las instrucciones de OpenSpec">Copiar</button>
+          </div>
+          <p class="copy-status" aria-live="polite" aria-atomic="true"></p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="shell">
+    <span>OpenSpec / Referencia de comandos</span>
+    <span>Una guía local. Sin dependencias externas.</span>
+  </footer>
+
+  <script>
+    document.querySelectorAll(".copy-button").forEach((button) => {
+      button.addEventListener("click", async () => {
+        const status = button.closest(".command-card").querySelector(".copy-status");
+        status.classList.remove("success", "failure");
+
+        try {
+          if (!navigator.clipboard || typeof navigator.clipboard.writeText !== "function") {
+            throw new Error("Clipboard API unavailable");
+          }
+          await navigator.clipboard.writeText(button.dataset.copy);
+          status.textContent = "Comando copiado.";
+          status.classList.add("success");
+        } catch {
+          status.textContent = "No se pudo copiar. Selecciona el comando y cópialo manualmente.";
+          status.classList.add("failure");
+        }
+      });
+    });
+  </script>
+</body>
+</html>
