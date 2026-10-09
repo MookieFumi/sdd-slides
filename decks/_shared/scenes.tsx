@@ -1,6 +1,6 @@
 import { QR, Reveal, Scene, defineDeck, qrConfigured, useScene } from 'beatdeck';
 import type { BeatDef, SceneDef } from 'beatdeck';
-import '../../themes/neutral.css';
+import '../../themes/mookie.css';
 import './deck.css';
 import { AgentFlow, BlockIntro, Bullets, CodeBlock, Card, CliCard, CliList, RouteList, RouteStrip, SectionOpen, Split, Summary, Tree } from './parts';
 import type { Step, TalkData } from './types';
@@ -49,7 +49,7 @@ export function buildDeck(d: TalkData, config: DeckConfig, sources: { guide: str
     const title = here && b === 1;
     return (
       <>
-        <div style={{ position: 'absolute', left: 952, top: 532, width: 16, height: 16, background: 'var(--accent)', opacity: here && b === 0 ? 1 : 0, transition: 'opacity 400ms' }} />
+        <div className="mk-brand" style={{ position: 'absolute', left: 760, top: 500, fontSize: 96, opacity: here && b === 0 ? 1 : 0, transition: 'opacity 400ms' }}><span className="mk-path">~/</span>mookie<span className="mk-cursor" /></div>
         <Reveal on={title} x={168} y={250}><div className="t-eyebrow">// {config.subtitle}</div></Reveal>
         <Reveal on={title} x={150} y={320} delay={120} ms={1100}>
           <div className="t-statement" style={{ fontSize: 240 }}>{d.name}</div>
@@ -57,6 +57,9 @@ export function buildDeck(d: TalkData, config: DeckConfig, sources: { guide: str
         </Reveal>
         <Reveal on={title} x={168} y={900} delay={400}>
           <div className="t-meta" style={{ fontSize: 22 }}>{config.author} · {config.place} · {config.date}</div>
+        </Reveal>
+        <Reveal on={title} x={168} y={170} delay={300}>
+          <div className="mk-prompt" style={{ fontSize: 30 }}><span className="u">mookie</span><span className="s">@</span><span className="h">dev</span><span className="s">:</span><span className="p">~</span><span className="s">$</span> cat {d.id}.md</div>
         </Reveal>
       </>
     );
@@ -160,6 +163,8 @@ export function buildDeck(d: TalkData, config: DeckConfig, sources: { guide: str
           <div className="t-statement" style={{ fontSize: 220 }}>¿Preguntas<span style={{ color: 'var(--accent)' }}>?</span></div>
         </Reveal>
         <Reveal on={here} x={170} y={680} delay={200}><div className="t-meta" style={{ fontSize: 24 }}>{config.author}</div></Reveal>
+        <Reveal on={here} x={170} y={740} delay={300}><div className="mk-brand" style={{ fontSize: 56 }}><span className="mk-path">~/</span>mookie<span className="mk-cursor" /></div></Reveal>
+        <Reveal on={here} x={170} y={820} delay={400}><div className="mk-prompt" style={{ fontSize: 26, color: 'var(--ink-2)' }}>mookiefumi.com</div></Reveal>
         {qr && <Reveal on={here} x={1440} y={330} delay={300}><QR url={config.qrUrl} size={320} /></Reveal>}
       </>
     );
@@ -172,6 +177,7 @@ export function buildDeck(d: TalkData, config: DeckConfig, sources: { guide: str
   function Stage() {
     return (
       <>
+        <div className="mk-brand" aria-hidden="true" style={{ position: 'absolute', right: 72, bottom: 44, fontSize: 24, color: 'var(--ink-3)' }}><span className="mk-path">~/</span>mookie</div>
         <Scene index={0}><Portada /></Scene>
         <Scene index={1}><Flujo /></Scene>
         <Req /><Inst />
@@ -188,7 +194,7 @@ export function buildDeck(d: TalkData, config: DeckConfig, sources: { guide: str
 
   return defineDeck({
     id: d.id, title: config.title, lang: 'es', scenes: SCENES, Stage,
-    fonts: ['400 100px "Inter Variable"', '600 100px "Inter Variable"', '400 32px "JetBrains Mono Variable"'],
+    fonts: ['400 100px "Geist Variable"', '700 100px "Geist Variable"', '400 32px "Geist Mono Variable"', '700 32px "Geist Mono Variable"'],
     qrUrl: config.qrUrl,
   });
 }
