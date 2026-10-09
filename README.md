@@ -35,3 +35,11 @@ npm run audit          # regenera docs/CONTRASTE.md
 - `https://mookiefumi.github.io/sdd-slides/spec-kit/` — charla de Spec Kit
 
 Settings → Pages → Source: GitHub Actions (una sola vez).
+
+**Analítica:** las visitas se registran con Cloudflare Web Analytics (sin cookies), con el mismo token que el blog
+(`analytics.config.json`). El script solo se inyecta en `npm run build` al montar `site/`; las charlas compiladas
+(`dist-*`) siguen siendo 100 % offline.
+
+## Flujo de trabajo
+
+`main` es la rama de integración. Se trabaja en ramas y se integra con PR en squash.
