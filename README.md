@@ -2,8 +2,8 @@
 
 Miguel Martín · Madrid · 9 oct 2026 · hecho con [beatdeck](https://github.com/borjaperfra/beatdeck).
 
-Dos charlas con **los mismos diez apartados**: portada, el flujo, requisitos, instalación, init del proyecto,
-qué genera el init, flujo en el chat de Copilot, terminal, dónde duele y preguntas. Cada paso lleva su etiqueta:
+Dos charlas con **los mismos once apartados**: portada, el flujo, requisitos, instalación, prepara el terreno
+(opcional: contexto y agente de gobierno), init del proyecto, qué genera el init, flujo en el chat de Copilot, terminal, dónde duele y preguntas. Cada paso lleva su etiqueta:
 `UNA VEZ`, `POR CAMBIO`/`POR FUNCIONALIDAD` u `OPCIONAL`.
 
 ```bash
@@ -20,7 +20,7 @@ npm run audit          # regenera docs/CONTRASTE.md
 
 | Ruta | Qué es |
 | --- | --- |
-| `decks/_shared/` | modelo de datos, componentes y las diez escenas (idénticas en las dos charlas) |
+| `decks/_shared/` | modelo de datos, componentes y las once escenas (idénticas en las dos charlas) |
 | `decks/openspec/`, `decks/spec-kit/` | el contenido de cada charla (`content.ts`) y su `deck.config.ts` |
 | `landing/` | la portada con los dos enlaces |
 | `reference/` | guías originales, datos reales de las CLI, extractos de los artículos y textos propios |

@@ -2,14 +2,14 @@ import { QR, Reveal, Scene, defineDeck, qrConfigured, useScene } from 'beatdeck'
 import type { BeatDef, SceneDef } from 'beatdeck';
 import '../../themes/neutral.css';
 import './deck.css';
-import { BlockIntro, Bullets, Card, CliCard, CliList, RouteList, RouteStrip, SectionOpen, Summary, Tree } from './parts';
+import { AgentFlow, BlockIntro, Bullets, CodeBlock, Card, CliCard, CliList, RouteList, RouteStrip, SectionOpen, Split, Summary, Tree } from './parts';
 import type { Step, TalkData } from './types';
 
 export interface DeckConfig {
   title: string; subtitle: string; author: string; place: string; date: string; qrUrl: string; qrLabel: string;
 }
 
-/** Los diez apartados, en este orden, son idénticos en las dos charlas. */
+/** Los once apartados, en este orden, son idénticos en las dos charlas. */
 export function buildDeck(d: TalkData, config: DeckConfig, sources: { guide: string; article: string }) {
   const where = (s: Step) =>
     s.surface.includes('COPILOT') ? 'Se escribe en el chat de GitHub Copilot (VS Code), no en la terminal.' : 'Se ejecuta en la terminal.';
@@ -29,12 +29,19 @@ export function buildDeck(d: TalkData, config: DeckConfig, sources: { guide: str
     ] },
     { id: '03', title: 'REQUISITOS', beats: [sect('requisitos', d.req), ...d.req.steps.map((s) => stepBeat('requisitos', s))] },
     { id: '04', title: 'INSTALACIÓN', beats: [sect('instalación', d.install), ...d.install.steps.map((s) => stepBeat('instalación', s))] },
-    { id: '05', title: 'INIT DEL PROYECTO', beats: [sect('init', d.init), ...d.init.steps.map((s) => stepBeat('init', s))] },
-    { id: '06', title: 'QUÉ GENERA EL INIT', beats: [sect('init real', d.generated), ...d.generated.groups.map((g) => ({ name: g.title.toLowerCase(), ref: 'salida real del init', source: g.items.join(' '), note: g.note }))] },
-    { id: '07', title: 'FLUJO EN EL CHAT', beats: [sect('chat', d.chat), ...d.chat.steps.map((s) => stepBeat('chat', s)), { name: 'resumen', source: `${d.chat.summaryLead} ${d.chat.summary}` }] },
-    { id: '08', title: 'TERMINAL', beats: [sect('terminal', d.cli), ...d.cli.steps.map((s) => stepBeat('terminal', s))] },
-    { id: '09', title: 'CUÁNDO NO', beats: [{ name: d.limits.title.toLowerCase(), ref: `${sources.article} · críticas`, source: d.limits.items.join(' '), note: d.limits.note }] },
-    { id: '10', title: 'PREGUNTAS', beats: [{ name: 'preguntas' }] },
+    { id: '05', title: 'PREPARA EL TERRENO', beats: [
+      sect('prepara el terreno', d.prep, 'Apartado opcional: recomendaciones previas al init.'),
+      { name: 'lo que deja el init', ref: 'plantilla real del init', source: d.prep.template.lines.join(' '), note: d.prep.template.note },
+      { name: 'qué va y qué no', ref: 'plantilla real del init', source: `${d.prep.split.deduce.join('. ')}. ${d.prep.split.only.join('. ')}.`, note: d.prep.split.note },
+      { name: 'agente de gobierno', ref: 'propio', source: d.prep.agent.steps.map((x) => `${x.label}: ${x.desc}`).join(' '), note: d.prep.agent.footer },
+      { name: 'ejemplo', ref: 'propio', source: d.prep.example.lines.join(' '), note: d.prep.example.note },
+    ] },
+    { id: '06', title: 'INIT DEL PROYECTO', beats: [sect('init', d.init), ...d.init.steps.map((s) => stepBeat('init', s))] },
+    { id: '07', title: 'QUÉ GENERA EL INIT', beats: [sect('init real', d.generated), ...d.generated.groups.map((g) => ({ name: g.title.toLowerCase(), ref: 'salida real del init', source: g.items.join(' '), note: g.note }))] },
+    { id: '08', title: 'FLUJO EN EL CHAT', beats: [sect('chat', d.chat), ...d.chat.steps.map((s) => stepBeat('chat', s)), { name: 'resumen', source: `${d.chat.summaryLead} ${d.chat.summary}` }] },
+    { id: '09', title: 'TERMINAL', beats: [sect('terminal', d.cli), ...d.cli.steps.map((s) => stepBeat('terminal', s))] },
+    { id: '10', title: 'CUÁNDO NO', beats: [{ name: d.limits.title.toLowerCase(), ref: `${sources.article} · críticas`, source: d.limits.items.join(' '), note: d.limits.note }] },
+    { id: '11', title: 'PREGUNTAS', beats: [{ name: 'preguntas' }] },
   ];
 
   function Portada() {
@@ -78,6 +85,20 @@ export function buildDeck(d: TalkData, config: DeckConfig, sources: { guide: str
     }
     return () => <Scene index={index}><S /></Scene>;
   };
+
+  function Prep() {
+    const { here, b } = useScene();
+    const p = d.prep;
+    return (
+      <>
+        <SectionOpen on={here && b === 0} out={here && b > 0} kicker={p.kicker} title={p.title} note={p.note} />
+        <CodeBlock on={here && b === 1} out={here && b > 1} title={p.template.title} lines={p.template.lines} note={p.template.note} />
+        <Split on={here && b === 2} out={here && b > 2} deduce={p.split.deduce} only={p.split.only} target={p.split.target} note={p.split.note} />
+        <AgentFlow on={here && b === 3} out={here && b > 3} title={p.agent.title} steps={p.agent.steps} footer={p.agent.footer} />
+        <CodeBlock on={here && b === 4} out={here && b > 4} title={p.example.title} lines={p.example.lines} note={p.example.note} />
+      </>
+    );
+  }
 
   function Genera() {
     const { here, b } = useScene();
@@ -146,19 +167,21 @@ export function buildDeck(d: TalkData, config: DeckConfig, sources: { guide: str
 
   const Req = cards(d.req, 2);
   const Inst = cards(d.install, 3);
-  const Init = cards(d.init, 4);
+  const Init = cards(d.init, 5);
 
   function Stage() {
     return (
       <>
         <Scene index={0}><Portada /></Scene>
         <Scene index={1}><Flujo /></Scene>
-        <Req /><Inst /><Init />
-        <Scene index={5}><Genera /></Scene>
-        <Scene index={6}><Chat /></Scene>
-        <Scene index={7}><Terminal_ /></Scene>
-        <Scene index={8}><Limites /></Scene>
-        <Scene index={9}><Fin /></Scene>
+        <Req /><Inst />
+        <Scene index={4}><Prep /></Scene>
+        <Init />
+        <Scene index={6}><Genera /></Scene>
+        <Scene index={7}><Chat /></Scene>
+        <Scene index={8}><Terminal_ /></Scene>
+        <Scene index={9}><Limites /></Scene>
+        <Scene index={10}><Fin /></Scene>
       </>
     );
   }

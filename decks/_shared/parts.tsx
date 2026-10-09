@@ -250,3 +250,81 @@ export function Bullets({ on, out, lead, items, note }: {
     </>
   );
 }
+
+/* ── Prepara el terreno (opcional) ─────────────────────────────────────── */
+
+const OptHead = ({ title }: { title: string }) => (
+  <div style={{ display: 'flex', alignItems: 'center', gap: 28 }}>
+    <div className="t-eyebrow" style={{ fontSize: 26 }}>{title}</div>
+    <span className="tag opt">OPCIONAL</span>
+  </div>
+);
+
+/** Bloque de texto monoespaciado (plantilla o ejemplo), sin comprobación de texto exacto. */
+export function CodeBlock({ on, out, title, lines, note }: {
+  on: boolean; out: boolean; title: string; lines: string[]; note: string;
+}) {
+  const longest = Math.max(...lines.map((l) => l.length));
+  const size = Math.max(26, Math.min(40, Math.floor(1620 / (longest * 0.62)), Math.floor(640 / (lines.length * 1.35))));
+  return (
+    <>
+      <Reveal on={on} out={out} x={150} y={110}><OptHead title={title} /></Reveal>
+      <Reveal on={on} out={out} x={150} y={200} delay={120}>
+        <div className="tree-line" style={{ fontSize: size, lineHeight: 1.35, fontWeight: 600, whiteSpace: 'pre' }}>{lines.join('\n')}</div>
+      </Reveal>
+      <Reveal on={on} out={out} x={150} y={900} delay={500} style={{ width: 1600 }}>
+        <div style={{ fontSize: 34, lineHeight: 1.35, color: 'var(--ink-2)' }}>{note}</div>
+      </Reveal>
+    </>
+  );
+}
+
+/** Dos columnas: lo que el agente deduce del código frente a lo que solo sabe el equipo. */
+export function Split({ on, out, deduce, only, target, note }: {
+  on: boolean; out: boolean; deduce: string[]; only: string[]; target: string; note: string;
+}) {
+  const col = (x: number, head: string, items: string[], strong: boolean, delay: number) => (
+    <Reveal on={on} out={out} x={x} y={230} delay={delay} style={{ width: 760 }}>
+      <div className="t-eyebrow" style={{ fontSize: 26, color: strong ? 'var(--accent)' : 'var(--ink-3)' }}>{head}</div>
+      {items.map((it) => (
+        <div key={it} style={{ fontSize: 40, lineHeight: 1.25, marginTop: 34, color: strong ? 'var(--ink)' : 'var(--ink-2)' }}>{it}</div>
+      ))}
+    </Reveal>
+  );
+  return (
+    <>
+      <Reveal on={on} out={out} x={150} y={110}><OptHead title="Qué va y qué no" /></Reveal>
+      {col(150, 'LO DEDUCE EL AGENTE DEL CÓDIGO', deduce, false, 120)}
+      {col(1010, `SOLO LO SABES TÚ → ${target}`, only, true, 320)}
+      <Reveal on={on} out={out} x={150} y={900} delay={600} style={{ width: 1600 }}>
+        <div style={{ fontSize: 34, lineHeight: 1.35, color: 'var(--ink-2)' }}>{note}</div>
+      </Reveal>
+    </>
+  );
+}
+
+/** El agente de gobierno: pasos numerados, con el que aún no está probado marcado. */
+export function AgentFlow({ on, out, title, steps, footer }: {
+  on: boolean; out: boolean; title: string; steps: { label: string; desc: string; pending?: boolean }[]; footer: string;
+}) {
+  return (
+    <>
+      <Reveal on={on} out={out} x={150} y={110}><OptHead title={title} /></Reveal>
+      {steps.map((st, i) => (
+        <Reveal key={st.label} on={on} out={out} x={150} y={210 + i * 120} delay={120 + i * 130} style={{ width: 1620 }}>
+          <div style={{ display: 'flex', alignItems: 'baseline', gap: 32 }}>
+            <span className="mono" style={{ fontSize: 28, color: 'var(--accent)', width: 52 }}>{String(i + 1).padStart(2, '0')}</span>
+            <div>
+              <span className="t-editorial" style={{ fontSize: 52 }}>{st.label}</span>
+              {st.pending && <span className="tag opt" style={{ marginLeft: 24 }}>POR PROBAR</span>}
+              <div style={{ fontSize: 32, color: 'var(--ink-2)', marginTop: 4 }}>{st.desc}</div>
+            </div>
+          </div>
+        </Reveal>
+      ))}
+      <Reveal on={on} out={out} x={150} y={930} delay={900} style={{ width: 1620 }}>
+        <div className="t-meta" style={{ fontSize: 24 }}>{footer}</div>
+      </Reveal>
+    </>
+  );
+}

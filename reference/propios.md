@@ -23,3 +23,7 @@ Ver las integraciones
 .github/prompts/opsx-*.prompt.md
 .github/skills/openspec-*/SKILL.md
 .github/skills/speckit-*/SKILL.md
+
+## Apartado "Prepara el terreno"
+Texto redactado para la charla (recomendaciones previas y agente de gobierno). Las líneas de plantilla proceden de la salida real del init
+(openspec/config.yaml y .specify/memory/constitution.md); los ejemplos son genéricos, con marcadores <…> que rellena cada equipo.
