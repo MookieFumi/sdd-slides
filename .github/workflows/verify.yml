@@ -16,7 +16,8 @@ jobs:
         with: { node-version: 22, cache: npm }
       - run: npm ci
       - run: npm run build
-      - run: npm run verify
+      - run: npm run verify:openspec
+      - run: npm run verify:spec-kit
       - uses: actions/upload-artifact@v4
         if: always()
-        with: { name: verify, path: artifacts/verify, retention-days: 7 }
+        with: { name: verify, path: artifacts/verify-*, retention-days: 7 }

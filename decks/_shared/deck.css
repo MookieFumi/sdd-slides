@@ -1,0 +1,10 @@
+/* Prompt de terminal decorativo: es CSS (::before), así el texto del DOM es exactamente el comando de la guía. */
+.sh .bd-term-line { font-weight: 600; }
+.sh .bd-term-line::before { content: '> '; color: var(--accent); font-weight: 600; transition: color 400ms; }
+.sh .bd-term-line.dim::before { color: var(--ink-3); }
+
+/* Etiqueta de tipo de paso: UNA VEZ · POR CAMBIO (rellena) · OPCIONAL (solo contorno) */
+.tag { display: inline-block; font-family: var(--mono, 'JetBrains Mono Variable', monospace); font-size: 24px; letter-spacing: .12em; padding: 6px 18px; border: 2px solid var(--accent); color: var(--accent); }
+.tag.fill { background: var(--accent); color: var(--bg, #000); }
+.tag.opt { border-style: dashed; color: var(--ink-2); border-color: var(--ink-3); }
+.tree-line { font-family: var(--mono, 'JetBrains Mono Variable', monospace); }
