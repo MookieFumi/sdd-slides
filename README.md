@@ -36,7 +36,7 @@ npm run audit          # regenera docs/CONTRASTE.md
 
 Settings → Pages → Source: GitHub Actions (una sola vez).
 
-**Analítica:** las visitas se registran con Cloudflare Web Analytics (sin cookies), con el mismo token que el blog
+**Analítica:** las visitas se registran con Cloudflare Web Analytics (sin cookies), con el token de este sitio
 (`analytics.config.json`). El script solo se inyecta en `npm run build` al montar `site/`; las charlas compiladas
 (`dist-*`) siguen siendo 100 % offline.
 

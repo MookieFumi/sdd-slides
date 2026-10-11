@@ -12,7 +12,7 @@ cpSync('dist-openspec', 'site/openspec', { recursive: true });
 cpSync('dist-spec-kit', 'site/spec-kit', { recursive: true });
 
 const beacon = token
-  ? `<!-- Cloudflare Web Analytics -->\n<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "${token}"}'></script>\n<!-- End Cloudflare Web Analytics -->\n`
+  ? `<!-- Cloudflare Web Analytics -->\n<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "${token}"}'></script>\n<!-- End Cloudflare Web Analytics -->\n`
   : '';
 for (const page of ['site/index.html', 'site/openspec/index.html', 'site/spec-kit/index.html']) {
   const html = readFileSync(page, 'utf8');
