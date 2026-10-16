@@ -2,8 +2,8 @@
 
 Miguel Martín · Madrid · 9 oct 2026 · hecho con [beatdeck](https://github.com/borjaperfra/beatdeck).
 
-Dos charlas con **los mismos once apartados**: portada, el flujo, requisitos, instalación, prepara el terreno
-(opcional: contexto y agente de gobierno), init del proyecto, qué genera el init, flujo en el chat de Copilot, terminal, dónde duele y preguntas. Cada paso lleva su etiqueta:
+Dos charlas con los mismos apartados: portada, el flujo, requisitos, instalación, prepara el terreno
+(solo Spec Kit: constitución), init del proyecto, qué genera el init (en OpenSpec incluye qué va en el config.yaml), flujo en el chat de Copilot y terminal. Cada paso lleva su etiqueta:
 `UNA VEZ`, `POR CAMBIO`/`POR FUNCIONALIDAD` u `OPCIONAL`.
 
 ```bash
