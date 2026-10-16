@@ -25,7 +25,7 @@ Automatic beats: ninguno. Todo avanza con un clic.
 
 Mapa de la charla (teclas 1–9 saltan a la escena): 1 portada · 2 OpenSpec (portada, flujo, preparar) ·
 3 OpenSpec · cambio (chat de Copilot) · 4 OpenSpec · terminal · 5 Spec Kit (portada, flujo, preparar) ·
-6 Spec Kit · flujo (chat de Copilot) · 7 Spec Kit · terminal · 8 preguntas. Total: 44 beats.
+6 Spec Kit · flujo (chat de Copilot) · 7 Spec Kit · terminal. Sin escena de preguntas ni de «dónde duele».
 
 ## If something goes wrong
 
@@ -37,4 +37,4 @@ Mapa de la charla (teclas 1–9 saltan a la escena): 1 portada · 2 OpenSpec (po
 
 ## Config to check on the day
 
-`decks/<charla>/deck.config.ts`: title, speaker, `qrUrl` (actualmente: `TODO`, es decir, sin QR; el cierre es solo "¿Preguntas?"). Rebuild after editing.
+`decks/<charla>/deck.config.ts`: title, speaker, `qrUrl` (actualmente: `TODO`, es decir, sin QR). Rebuild after editing.

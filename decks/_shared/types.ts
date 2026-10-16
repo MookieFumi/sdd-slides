@@ -20,9 +20,9 @@ export interface Step {
   note?: string;
   /** Posición en la franja del flujo (solo pasos del chat). */
   strip?: number;
+  /** Comando alternativo que se muestra en la misma slide (p. ej. pnpm junto a npm). */
+  alt?: { label: string; cmd: string };
 }
-
-export interface Limits { title: string; lead: string; items: string[]; note: string }
 
 export interface TalkData {
   id: string;
@@ -36,23 +36,23 @@ export interface TalkData {
   routeNote: string;
   req: { kicker: string; title: string; note: string; steps: Step[] };
   install: { kicker: string; title: string; note: string; steps: Step[] };
-  /** Apartado opcional previo al init: recomendaciones y ayuda del agente de gobierno. */
-  prep: {
+  /** Apartado opcional previo al init: recomendaciones. */
+  prep?: {
     kicker: string; title: string; note: string;
     template: { title: string; lines: string[]; note: string };
     split: { deduce: string[]; only: string[]; target: string; note: string };
-    agent: { title: string; steps: { label: string; desc: string; pending?: boolean }[]; footer: string };
     example: { title: string; lines: string[]; note: string };
   };
   init: { kicker: string; title: string; note: string; steps: Step[] };
   generated: {
     kicker: string; title: string; note: string;
     groups: { title: string; items: string[]; note: string }[];
+    /** Qué se deduce del código y qué solo lo sabe el equipo; va tras el config.yaml. */
+    split?: { deduce: string[]; only: string[]; target: string; note: string };
   };
   chat: {
     kicker: string; title: string; note: string; steps: Step[];
     summaryLead: string; summary: string;
   };
   cli: { kicker: string; title: string; note: string; steps: Step[] };
-  limits: Limits;
 }

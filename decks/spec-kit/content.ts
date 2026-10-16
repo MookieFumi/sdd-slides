@@ -70,17 +70,6 @@ export const SPECKIT: TalkData = {
       target: 'principios y restricciones',
       note: 'Principios verificables en una revisión de PR o con /speckit-analyze, no descripciones del proyecto.',
     },
-    agent: {
-      title: 'EL AGENTE DE GOBIERNO',
-      steps: [
-        { label: 'Explora la solución', desc: 'Deduce el stack, las convenciones de código y de tests, y la estructura.' },
-        { label: 'Pregunta cuando hay dudas', desc: 'No da nada por sentado: lo que no puede deducir, te lo pregunta.' },
-        { label: 'Fusiona la documentación interna', desc: 'Si ya existe, la integra con lo que ve en el código y aclara las contradicciones.' },
-        { label: 'Propone el borrador', desc: 'Ya genera copilot-instructions, skills y agentes. El borrador de la constitución es el siguiente paso.', pending: true },
-        { label: 'Tú revisas y apruebas', desc: 'El borrador no se aplica solo: la decisión es del equipo.' },
-      ],
-      footer: 'Agente de gobierno · probado con equipos .NET · cubre todo el stack salvo pipelines (Jenkins, Azure DevOps)',
-    },
     example: {
       title: 'EJEMPLO GENÉRICO · constitution.md',
       lines: [
@@ -172,15 +161,4 @@ export const SPECKIT: TalkData = {
     ],
   },
 
-  limits: {
-    title: 'Dónde duele',
-    lead: 'Dónde duele',
-    items: [
-      'Mar de Markdown: en proyectos pequeños los documentos superan al código.',
-      'Efecto cascada: un cambio a mitad de camino obliga a actualizar toda la cadena.',
-      'Contexto limitado: constitución, spec, plan y tareas pueden agotar el del agente.',
-      'Para añadir funciones puntuales a un proyecto existente, conviene OpenSpec.',
-    ],
-    note: 'Fuente: artículo de Webreactiva sobre Spec Kit. El flujo de vuelta y converge mitigan la cascada, pero no la eliminan.',
-  },
 };
