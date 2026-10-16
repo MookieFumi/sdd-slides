@@ -156,8 +156,6 @@ export function buildDeck(d: TalkData, config: DeckConfig, sources: { guide: str
     return (
       <>
         <div className="mk-brand" aria-hidden="true" style={{ position: 'absolute', right: 72, bottom: 44, fontSize: 24, color: 'var(--ink-3)' }}><span className="mk-path">~/</span>mookie</div>
-        <Scene index={0}><Portada /></Scene>
-        <Scene index={1}><Flujo /></Scene>
         {ORDER.map((o, i) => <Scene key={o.title} index={i}><o.Body /></Scene>)}
       </>
     );
