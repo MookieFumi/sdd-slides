@@ -31,74 +31,12 @@ export const OPENSPEC: TalkData = {
     note: 'Instala la herramienta una vez. Ejecútalo en CMD o PowerShell.',
     steps: [
       { index: '01 / Herramienta', tag: 'UNA VEZ', surface: 'TERMINAL', title: 'Instalar OpenSpec', cmd: 'npm install -g @fission-ai/openspec@latest',
-        desc: 'Instala la CLI de forma global.', check: 'guía+artículo+CLI' },
-      { index: '02 / Alternativa', tag: 'OPCIONAL', surface: 'TERMINAL', title: 'Instalar con pnpm', cmd: 'pnpm add -g @fission-ai/openspec@latest',
-        desc: 'Si usas pnpm en lugar de npm. También funcionan yarn y bun.', check: 'solo artículo',
-        note: 'Solo aparece en el artículo de Webreactiva; no está en la guía.' },
+        alt: { label: 'O CON PNPM · TAMBIÉN YARN Y BUN', cmd: 'pnpm add -g @fission-ai/openspec@latest' },
+        desc: 'Instala la CLI de forma global.', check: 'guía+artículo+CLI',
+        note: 'La alternativa con pnpm solo aparece en el artículo de Webreactiva; no está en la guía.' },
     ],
   },
 
-  prep: {
-    kicker: 'ANTES DEL INIT · OPCIONAL', title: 'Prepara el terreno',
-    note: 'El init deja plantillas vacías. Rellenarlas bien es lo que más cambia el resultado. Se vuelcan en openspec/config.yaml después del init.',
-    template: {
-      title: 'LO QUE DEJA EL INIT · openspec/config.yaml',
-      lines: [
-        '# Project context (optional)',
-        '# Include constraints an agent cannot infer by reading the code.',
-        '#   context: |',
-        '#     Write all artifacts in Spanish',
-        '',
-        '# Per-artifact rules (optional)',
-        '#   rules:',
-        '#     proposal:',
-        '#       - Always state what is out of scope',
-        '',
-        '# Per-operation guidance (optional)',
-        '#   operations:',
-        '#     apply:',
-      ],
-      note: 'Todo viene comentado: sin contexto, OpenSpec genera artefactos genéricos.',
-    },
-    split: {
-      deduce: ['Stack y versión de .NET', 'Convenciones de tests', 'Estructura de proyectos', 'Estilo y nombres'],
-      only: ['Idioma de los artefactos', 'Ticketing y nombre del cambio', 'Equipos y sistemas afectados', 'Normativa y decisiones ya tomadas'],
-      target: 'context y rules',
-      note: 'La regla de la propia plantilla: solo restricciones que un agente no puede inferir leyendo el código.',
-    },
-    agent: {
-      title: 'EL AGENTE DE GOBIERNO',
-      steps: [
-        { label: 'Explora la solución', desc: 'Deduce el stack, las convenciones de código y de tests, y la estructura.' },
-        { label: 'Pregunta cuando hay dudas', desc: 'No da nada por sentado: lo que no puede deducir, te lo pregunta.' },
-        { label: 'Fusiona la documentación interna', desc: 'Si ya existe, la integra con lo que ve en el código y aclara las contradicciones.' },
-        { label: 'Propone el borrador', desc: 'Ya genera copilot-instructions, skills y agentes. El borrador de config.yaml es el siguiente paso.', pending: true },
-        { label: 'Tú revisas y apruebas', desc: 'El borrador no se aplica solo: la decisión es del equipo.' },
-      ],
-      footer: 'Agente de gobierno · probado con equipos .NET · cubre todo el stack salvo pipelines (Jenkins, Azure DevOps)',
-    },
-    example: {
-      title: 'EJEMPLO GENÉRICO · config.yaml',
-      lines: [
-        'context: |',
-        '  Artefactos en español; identificadores en inglés.',
-        '  Tickets: <ISSUE_TRACKER>, clave al inicio del cambio.',
-        '  Sistemas y equipos afectados: <A>, <B>.',
-        '  Prohibido: <librería X> (licencia).',
-        'rules:',
-        '  proposal:',
-        '    - Impacto en seguridad y datos.',
-        '    - Cambios incompatibles en APIs.',
-        '  tasks:',
-        '    - Máximo ~2 horas; tests Arrange/Act/Assert.',
-        'operations:',
-        '  apply:',
-        '    guidance:',
-        '      - Build y tests antes de marcar la tarea.',
-      ],
-      note: 'Los valores entre <…> los rellena cada equipo. Qué va en context, en rules y en operations.',
-    },
-  },
   init: {
     kicker: 'UNA VEZ POR PROYECTO', title: 'Inicializar el proyecto',
     note: 'En la carpeta del proyecto. Inicializa cada proyecto en el que vayas a usar OpenSpec.',
@@ -120,6 +58,12 @@ export const OPENSPEC: TalkData = {
       { title: 'LA ESTRUCTURA DE OPENSPEC', note: 'specs/ es la fuente de verdad; cada cambio vive en changes/ hasta que se archiva.',
         items: ['openspec/specs/', 'openspec/changes/archive/', 'openspec/config.yaml'] },
     ],
+    split: {
+      deduce: ['Stack y versión de .NET', 'Convenciones de tests', 'Estructura de proyectos', 'Estilo y nombres'],
+      only: ['Idioma de los artefactos', 'Ticketing y nombre del cambio', 'Equipos y sistemas afectados', 'Normativa y decisiones ya tomadas'],
+      target: 'context y rules',
+      note: 'La regla de la propia plantilla: solo restricciones que un agente no puede inferir leyendo el código.',
+    },
   },
 
   chat: {
@@ -158,15 +102,4 @@ export const OPENSPEC: TalkData = {
     ],
   },
 
-  limits: {
-    title: 'Dónde duele',
-    lead: 'Dónde duele',
-    items: [
-      'Mantener specs y código alineados es el dolor más real.',
-      'Tratar la spec como intocable devuelve a un waterfall.',
-      'Escribir specs quita tiempo de programar: tiene que compensar en revisiones.',
-      'Para un prototipo o un proyecto pequeño, basta con vibe coding.',
-    ],
-    note: 'Fuente: artículo de Webreactiva sobre OpenSpec. No es una limitación de la herramienta, sino de cómo se usa.',
-  },
 };

@@ -107,7 +107,7 @@ export function Card({ on, out, step }: { on: boolean; out: boolean; step: Step 
         <div className="t-editorial" data-exact style={{ fontSize: 80 }}>{step.title}</div>
       </Reveal>
       {hasCmd && (
-        <Reveal on={on} out={out} x={150} y={shell ? 480 : 460} delay={200}>
+        <Reveal on={on} out={out} x={150} y={step.alt ? 400 : shell ? 480 : 460} delay={200}>
           {shell ? (
             <Terminal className="sh" prompt="" size={termSize(step.cmd)} lines={[step.cmd]} />
           ) : (
@@ -115,7 +115,13 @@ export function Card({ on, out, step }: { on: boolean; out: boolean; step: Step 
           )}
         </Reveal>
       )}
-      <Reveal on={on} out={out} x={150} y={hasCmd ? 690 : 420} delay={320} style={{ width: 1380 }}>
+      {step.alt && (
+        <Reveal on={on} out={out} x={150} y={560} delay={260}>
+          <div className="t-eyebrow" style={{ fontSize: 26, marginBottom: 16 }}>{step.alt.label}</div>
+          <Terminal className="sh" prompt="" size={termSize(step.alt.cmd)} lines={[step.alt.cmd]} />
+        </Reveal>
+      )}
+      <Reveal on={on} out={out} x={150} y={step.alt ? 800 : hasCmd ? 690 : 420} delay={320} style={{ width: 1380 }}>
         <div style={{ fontSize: hasCmd ? 42 : 56, lineHeight: 1.35, color: 'var(--ink-2)' }}>{step.desc}</div>
       </Reveal>
     </>
@@ -298,32 +304,6 @@ export function Split({ on, out, deduce, only, target, note }: {
       {col(1010, `SOLO LO SABES TÚ → ${target}`, only, true, 320)}
       <Reveal on={on} out={out} x={150} y={900} delay={600} style={{ width: 1600 }}>
         <div style={{ fontSize: 34, lineHeight: 1.35, color: 'var(--ink-2)' }}>{note}</div>
-      </Reveal>
-    </>
-  );
-}
-
-/** El agente de gobierno: pasos numerados, con el que aún no está probado marcado. */
-export function AgentFlow({ on, out, title, steps, footer }: {
-  on: boolean; out: boolean; title: string; steps: { label: string; desc: string; pending?: boolean }[]; footer: string;
-}) {
-  return (
-    <>
-      <Reveal on={on} out={out} x={150} y={110}><OptHead title={title} /></Reveal>
-      {steps.map((st, i) => (
-        <Reveal key={st.label} on={on} out={out} x={150} y={210 + i * 120} delay={120 + i * 130} style={{ width: 1620 }}>
-          <div style={{ display: 'flex', alignItems: 'baseline', gap: 32 }}>
-            <span className="mono" style={{ fontSize: 28, color: 'var(--accent)', width: 52 }}>{String(i + 1).padStart(2, '0')}</span>
-            <div>
-              <span className="t-editorial" style={{ fontSize: 52 }}>{st.label}</span>
-              {st.pending && <span className="tag opt" style={{ marginLeft: 24 }}>POR PROBAR</span>}
-              <div style={{ fontSize: 32, color: 'var(--ink-2)', marginTop: 4 }}>{st.desc}</div>
-            </div>
-          </div>
-        </Reveal>
-      ))}
-      <Reveal on={on} out={out} x={150} y={930} delay={900} style={{ width: 1620 }}>
-        <div className="t-meta" style={{ fontSize: 24 }}>{footer}</div>
       </Reveal>
     </>
   );
